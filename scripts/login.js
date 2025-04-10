@@ -1,22 +1,14 @@
-body {
-    background: linear-gradient(to right, #4f269a, #1f1f1f);
-    font-family: 'Open Sans', sans-serif;
-  }
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
   
-  .card {
-    background-color: #ffffff;
-    border-radius: 10px;
-  }
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value.trim();
   
-  .card-title {
-    font-weight: 700;
-  }
-  
-  .btn-warning {
-    font-weight: bold;
-  }
-  
-  a {
-    color: #4f269a;
-  }
+    if (email === "teste@teste" && senha === "teste") {
+      alert("Login bem-sucedido! Bem-vindo ao Sensacionalismo FC 🎉");
+      window.location.href = "inicio.html"; // redireciona para a home (altere se quiser)
+    } else {
+      alert("❌ E-mail ou senha incorretos. Tente novamente.");
+    }
+  });
   
