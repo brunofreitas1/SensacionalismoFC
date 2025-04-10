@@ -1,144 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site de notícias futebolísticas">
-    <meta name="author" content="BrunoBrandao&GabrielTimoteo">
-    <meta name="keywords" content="Notícias de futebol sensacionalistas">
-    <title>Sensacionalismo FC</title>
-    <link rel="stylesheet" href=".\css\style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Site de notícias futebolísticas" />
+  <meta name="author" content="BrunoBrandao&GabrielTimoteo" />
+  <meta name="keywords" content="Notícias de futebol sensacionalistas" />
+  <title>Sensacionalismo FC</title>
 
-    <input>
-
+  <link rel="stylesheet" href=".\css\style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src=".\scripts\scripts.js" defer></script>
 </head>
-
-<script src="./scripts/scripts.js" defer></script>
-
 <body>
+  <header>
+    <h1>Sensacionalismo FC</h1>
+    <nav>
+      <ul>
+        <li><a href="#hero">Início</a></li>
+        <li><a href="#campeonatos">Campeonatos</a></li>
+        <li><a href="#como-funciona">Como Funciona</a></li>
+        <li><a href="#cadastro">Cadastro</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <header>
-        <h1>Sensacionalismo FC</h1>
-        <!-- Barra de Navegação -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="sobre.html">Principais notícias</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+  <section id="hero" class="hero">
+    <h2>O site mais sensacionalista do futebol brasileiro!</h2>
+    <p>As notícias que fazem seu grupo do WhatsApp pegar fogo 🔥</p>
+    <a href="#cadastro" class="btn-cta">Comece agora</a>
+  </section>
 
-    <main>
-        <article>
-            <h2>Seja bem vindo ao site de notícias futebolísticas mais sensacionalistas da Internet!</h2>
-            <p>Neste site você encontra as principais notícias do seu time da maneira mais
-                 sensacionalista possível para gerar muito engajamento e dinheiro no nosso bolso!
-            </p>
-            <p>Sigam também nossas redes sociais @Sensacionalismo_FC em todas as redes.</p>
-        </article>
-        <!-- Lista não ordenada -->
-        <h3>Aqui você encontra notícias dos principais campeonatos!</h3>
-        <ul>
-            <li>Campeonato Brasileiro</li>
-            <li>Estaduais</li>
-            <li>Copa do Brasil</li>
-            <li>Libertadores</li>
-            <li>Sul-Americana</li>
-        </ul>
-        <!-- Lista ordenada -->
-        <h3>Para acompanhar seu time do coração, siga os passos abaixo:</h3>
-        <ol>
-            <li>Faça o seu cadastro</li>
-            <li>Selecione o seu time do coração</li>
-            <li>Faça login</li>
-            <li>Acompanhe as principais notícias na tela inicial</li>
-        </ol>
-        <!-- Imagem -->
-        <h1>Aqui você marca um gol de placa!</h1>
-     
+  <main>
+    <section id="campeonatos" class="section">
+      <h3>🏆 Cobertura dos principais campeonatos</h3>
+      <div class="card-grid">
+        <div class="card"><h4>Brasileirão</h4></div>
+        <div class="card"><h4>Copa do Brasil</h4></div>
+        <div class="card"><h4>Estaduais</h4></div>
+        <div class="card"><h4>Libertadores</h4></div>
+        <div class="card"><h4>Sul-Americana</h4></div>
+      </div>
+    </section>
 
-        <p><img src="img/istockphoto-1415580725-612x612.jpg" alt="Gol"  width="500"></p>
+    <section id="como-funciona" class="section">
+      <h3>📲 Como acompanhar seu time do coração</h3>
+      <ol>
+        <li>Crie seu cadastro</li>
+        <li>Escolha seu time</li>
+        <li>Faça login</li>
+        <li>Receba atualizações automáticas</li>
+      </ol>
+    </section>
 
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="img/corinthians.jpg" class="d-block w-100" alt="corinthians" width="500">
-              </div>
-              <div class="carousel-item">
-                <img src="img/meninoney.jpg" alt="menino ney" class="d-block w-100" width="500">
-              </div>
-              <div class="carousel-item">
-                <img src="img/wellingtonrato.webp"  alt="wellingtonrato" class="d-block w-100" width="500">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+    <section id="galeria" class="section">
+      <h3>📷 Bastidores do futebol</h3>
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="img/corinthians.jpg" class="d-block w-100" alt="Corinthians" />
           </div>
+          <div class="carousel-item">
+            <img src="img/meninoney.jpg" class="d-block w-100" alt="Menino Ney" />
+          </div>
+          <div class="carousel-item">
+            <img src="img/wellingtonrato.webp" class="d-block w-100" alt="Wellington Rato" />
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
 
-    </main>
-
-    <h1>Formulário de Exemplo</h1>
-    <form onsubmit="validarCPF(cpf)">
-        <!-- Fieldset para agrupar seções do formulário -->
+    <section id="cadastro" class="section">
+      <h3>📝 Cadastro</h3>
+      <form onsubmit="return validarCPF(event)">
         <fieldset>
-            <legend>Realizar Cadastro</legend>
-            
-            <!-- Label e input para nome -->
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required><br><br>
-            
-            <!-- Label e input para e-mail -->
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            
-            <!-- Label e input para senha -->
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required><br><br>
+          <legend>Seja membro da torcida mais polêmica da web!</legend>
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" required /><br />
 
-            <label for="CPF">CPF:</label>
-            <input type="text" id="CPF" name="CPF" required><br><br>
-            
-            <!-- Label e input para número -->
-            <label for="idade">Idade:</label>
-            <input type="number" id="idade" name="idade" min="1" max="100"><br><br>
-            
-            <!-- Label e input para data -->
-            <label for="data-nascimento">Data de Nascimento:</label>
-            <input type="date" id="data-nascimento" name="data-nascimento"><br><br>
-            
-            <!-- Label e input para URL -->
-            <label for="site">Time do coração:</label>
-            <input type="club" id="time" name="time"><br><br>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" required /><br />
+
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" required /><br />
+
+          <label for="CPF">CPF:</label>
+          <input type="text" id="CPF" required /><br />
+
+          <label for="idade">Idade:</label>
+          <input type="number" id="idade" min="1" max="100" /><br />
+
+          <label for="data-nascimento">Nascimento:</label>
+          <input type="date" id="data-nascimento" /><br />
+
+          <label for="time">Time do Coração:</label>
+          <input type="text" id="time" /><br />
+
+          <button class="button1">Cadastrar</button>
+          <button type="reset" class="button2">Limpar</button>
         </fieldset>
-        
-        <!-- Botões -->
-        
-        <button class="button1 button">Realizar Cadastro</button>
-        <button class="button2 buttonn">Redefinir</button>
-        
-    </form>
+      </form>
+    </section>
+  </main>
 
-    <footer>
-        <address>
-            <p>Idealizado por <a href="Bruno&Gabriel@exemplo.com">Bruno & Gabriel</a>.</p>
-            <p>Visite-nos em:</p>
-            <p>Rua dos Exemplos, 123<br>Centro, São Paulo - SP<br>Brasil</p>
-        </address>
-        <p>&copy; 2024 Minha Página Web. Todos os direitos reservados.</p>
-    </footer>
+  <footer id="contato">
+    <address>
+      <p>Idealizado por <a href="mailto:Bruno&Gabriel@exemplo.com">Bruno & Gabriel</a>.</p>
+      <p>Rua dos Exemplos, 123 — São Paulo/SP</p>
+    </address>
+    <p>&copy; 2024 Sensacionalismo FC. Todos os direitos reservados.</p>
+  </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
