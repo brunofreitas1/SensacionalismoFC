@@ -20,7 +20,7 @@
       window.location.href = "login.html";
     }
   </script>
-  <header>
+  <header role="banner">
     <h1>Sensacionalismo FC</h1>
     <nav>
       <ul>
@@ -31,7 +31,12 @@
         <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
-    <button onclick="logout()" class="btn btn-danger">Sair</button>
+  
+    <div style="position: fixed; top: 10px; right: 10px;">
+      <button onclick="logout()" class="btn btn-danger">Sair</button>
+    </div>
+    
+
   <script>
     function logout() {
     localStorage.removeItem("usuarioLogado");
@@ -46,7 +51,7 @@
     <a href="#cadastro" class="btn-cta">Comece agora</a>
   </section>
 
-  <main>
+  <main role="main">
     <section id="campeonatos" class="section">
       <h3>🏆 Cobertura dos principais campeonatos</h3>
       <div class="card-grid">
@@ -151,7 +156,7 @@
     </section>
   </main>
 
-  <footer id="contato">
+  <footer id="contato" role="contentinfo">
     <address>
       <p>Idealizado por <a href="mailto:Bruno&Gabriel@exemplo.com">Bruno & Gabriel</a>.</p>
       <p>Rua dos Exemplos, 123 — São Paulo/SP</p>
