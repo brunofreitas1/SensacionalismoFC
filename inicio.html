@@ -20,30 +20,36 @@
       window.location.href = "login.html";
     }
   </script>
-  <header role="banner">
-    <h1>Sensacionalismo FC</h1>
-    <nav>
-      <ul>
-        <li><a href="#hero">Início</a></li>
-        <li><a href="#campeonatos">Campeonatos</a></li>
-        <li><a href="#como-funciona">Como Funciona</a></li>
-        <li><a href="#cadastro">Cadastro</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </nav>
-  
-    <div style="position: fixed; top: 10px; right: 10px;">
-      <button onclick="logout()" class="btn btn-danger">Sair</button>
-    </div>
-    
+<header role="banner" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 40px; background-color: #512da8;">
+
+  <!-- Logo -->
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img src=".\img\logo.png" alt="Logo Sensacionalismo FC" style="height: 75px;">
+  </div>
+
+  <!-- Navegação -->
+  <nav style="flex: 1; display: flex; justify-content: center;">
+    <ul style="display: flex; gap: 30px; list-style: none; margin: 0; padding: 0;">
+      <li><a href="#hero" style="color: white; text-decoration: none; font-weight: bold;">Início</a></li>
+      <li><a href="#campeonatos" style="color: white; text-decoration: none; font-weight: bold;">Campeonatos</a></li>
+      <li><a href="#como-funciona" style="color: white; text-decoration: none; font-weight: bold;">Como Funciona</a></li>
+      <li><a href="#cadastro" style="color: white; text-decoration: none; font-weight: bold;">Cadastro</a></li>
+      <li><a href="#contato" style="color: white; text-decoration: none; font-weight: bold;">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- Botão Sair -->
+  <div>
+    <button onclick="logout()" class="btn btn-danger">Sair</button>
+  </div>
 
   <script>
     function logout() {
-    localStorage.removeItem("usuarioLogado");
-    window.location.href = "login.html";
-  }
+      localStorage.removeItem("usuarioLogado");
+      window.location.href = "login.html";
+    }
   </script>
-  </header>
+</header>
 
   <section id="hero" class="hero">
     <h2>O site mais sensacionalista do futebol brasileiro!</h2>
@@ -51,15 +57,63 @@
     <a href="#cadastro" class="btn-cta">Comece agora</a>
   </section>
 
+  <section id="sobre" class="section" style="padding: 50px 30px; border-top: 4px">
+    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 20px;">💭 Sobre o Sensacionalismo FC</h2>
+
+    <div style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6; color: #333; text-align: center;">
+      <p>
+        Aqui não tem <strong>papo furado</strong>! O <strong>Sensacionalismo FC</strong> nasceu pra você que curte futebol e adora uma boa zoeira ⚽🔥
+      </p>
+
+      <p>
+        Acompanhe as <strong>notícias mais polêmicas</strong>, <strong>matérias engraçadas</strong> e <strong>fofocas do mundo da bola</strong> – tudo sem filtro e com imparcialidade. Ou quase... 😏
+      </p>
+
+      <p>
+        E o melhor: <strong>seu time do coração</strong> é prioridade por aqui! A gente coloca ele sempre no topo das manchetes (até quando não merece).
+      </p>
+
+      <p style="margin-top: 25px; font-weight: bold;">
+        Porque no Sensacionalismo FC, o futebol é levado a sério... mas só até a próxima piada. 😂
+      </p>
+    </div>
+  </section>
+
   <main role="main">
-    <section id="campeonatos" class="section">
-      <h3>🏆 Cobertura dos principais campeonatos</h3>
-      <div class="card-grid">
-        <div class="card"><h4>Brasileirão</h4></div>
-        <div class="card"><h4>Copa do Brasil</h4></div>
-        <div class="card"><h4>Estaduais</h4></div>
-        <div class="card"><h4>Libertadores</h4></div>
-        <div class="card"><h4>Sul-Americana</h4></div>
+    <section id="campeonatos" class="section" style="padding: 50px 30px;">
+      <h3 style="text-align: center; font-size: 2rem; margin-bottom: 30px;">🏆 Cobertura dos principais campeonatos</h3>
+      <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+        
+        <div class="card-campeonato">
+          <i class="fas fa-flag-checkered fa-2x"></i>
+          <h4>Brasileirão</h4>
+        </div>
+    
+        <div class="card-campeonato">
+          <i class="fas fa-trophy fa-2x"></i>
+          <h4>Copa do Brasil</h4>
+        </div>
+    
+        <div class="card-campeonato">
+          <i class="fas fa-map-marker-alt fa-2x"></i>
+          <h4>Estaduais</h4>
+        </div>
+    
+        <div class="card-campeonato">
+          <i class="fas fa-globe-americas fa-2x"></i>
+          <h4>Libertadores</h4>
+        </div>
+    
+        <div class="card-campeonato">
+          <i class="fas fa-shield-alt fa-2x"></i>
+          <h4>Sul-Americana</h4>
+        </div>
+
+        <div class="card-campeonato">
+          <i class="fas fa-crown fa-2x"></i>
+          <h4>Super Copa</h4>
+        </div>
+    
       </div>
     </section>
 
@@ -86,22 +140,22 @@
           <div class="carousel-item active">
             <img src="img/comemoracao.png" class="d-block w-100" alt="Comemoracao" />
             <div class="carousel-caption d-none d-md-block">
-              <h5>Vitória do Timão!</h5>
-              <p>Timão vence o Palmeiras por 1 a 0 no jogo de ida das finais do campeonato paulista</p>
+              <h5>Freguesia instaurada</h5>
+              <p>Mais uma vez o timão atropela os Enzos da barra funda</p>
             </div>
           </div>
           <div class="carousel-item">
             <img src="img/juiz.png" class="d-block w-100" alt="Juiz" />
             <div class="carousel-caption d-none d-md-block">
-              <h5>Penalti pro palmeiras!</h5>
-              <p>Mais um penalti polemico para o palmeiras na libertadores</p>
+              <h5>Mais um pênalti pro Varmeiras!</h5>
+              <p>Rafael Veiga espirra dentro da grande área, cai no chão e um pênalti é marcado a favor do Palmeiras.</p>
             </div>
           </div>
           <div class="carousel-item">
             <img src="img/selecoes.png" class="d-block w-100" alt="Nigeria" />
             <div class="carousel-caption d-none d-md-block">
               <h5>Surpreendente</h5>
-              <p>Nigéria bate a seleção da França por 3 a 0</p>
+              <p>Nigéria bate a seleção da França por 3 a 0 com três gols contras de Mbappe</p>
             </div>
           </div>
           <div class="carousel-item">
@@ -123,37 +177,46 @@
       </div>
     </section>
 
-    <section id="cadastro" class="section">
-      <h3>📝 Cadastro</h3>
-      <form onsubmit="return validarCPF(event)">
-        <fieldset>
-          <legend>Seja membro da torcida mais polêmica da web!</legend>
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" required /><br />
-
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" required /><br />
-
-          <label for="senha">Senha:</label>
-          <input type="password" id="senha" required /><br />
-
-          <label for="CPF">CPF:</label>
-          <input type="text" id="CPF" required /><br />
-
-          <label for="idade">Idade:</label>
-          <input type="number" id="idade" min="1" max="100" /><br />
-
-          <label for="data-nascimento">Nascimento:</label>
-          <input type="date" id="data-nascimento" /><br />
-
-          <label for="time">Time do Coração:</label>
-          <input type="text" id="time" /><br />
-
-          <button class="button1">Cadastrar</button>
-          <button type="reset" class="button2">Limpar</button>
+    <section id="cadastro" class="section" style="padding: 50px 30px;">
+      <h3 style="text-align: center; font-size: 2rem; margin-bottom: 30px;">📝 Cadastro</h3>
+    
+      <form onsubmit="return validarCPF(event)" style="display: flex; flex-direction: column; gap: 18px; max-width: 800px; margin: 0 auto;">
+        <fieldset style="border: none; padding: 0;">
+          <legend style="font-weight: bold; font-size: 1.2rem; color: #311b92; margin-bottom: 20px; text-align: center;">
+            Seja membro da torcida mais polêmica da web!
+          </legend>
+    
+          <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+              <label for="nome" style="color: #333; font-weight: bold;">Nome:</label>
+              <input type="text" id="nome" required style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%;" />
+    
+              <label for="senha" style="color: #333; font-weight: bold;">Senha:</label>
+              <input type="password" id="senha" required style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%;" />
+    
+              <label for="data-nascimento" style="color: #333; font-weight: bold;">Nascimento:</label>
+              <input type="date" id="data-nascimento" style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%;" />
+            </div>
+    
+            <div style="flex: 1; min-width: 300px;">
+              <label for="email" style="color: #333; font-weight: bold;">E-mail:</label>
+              <input type="email" id="email" required style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%;" />
+    
+              <label for="CPF" style="color: #333; font-weight: bold;">CPF:</label>
+              <input type="text" id="CPF" required style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%;" />
+    
+              <label for="time" style="color: #333; font-weight: bold;">Time do Coração:</label>
+              <input type="text" id="time" style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%;" />
+            </div>
+          </div>
+    
+          <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+            <button type="submit" style="padding: 12px 25px; background-color: #512da8; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Cadastrar</button>
+            <button type="reset" style="padding: 12px 25px; background-color: #bdbdbd; color: #212121; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Limpar</button>
+          </div>
         </fieldset>
       </form>
-    </section>
+    </section>       
   </main>
 
   <footer id="contato" role="contentinfo">
