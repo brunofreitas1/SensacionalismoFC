@@ -19,3 +19,9 @@ body {
 a {
   color: #4f269a;
 }
+
+form {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
