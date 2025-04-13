@@ -4,6 +4,7 @@ body {
     padding: 0;
     background: linear-gradient(to right, #ece9e6, #d2d1d1);
     color: #444;
+    overflow-x: hidden;
   }
   
   header {
@@ -162,7 +163,68 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
 
-  a:focus, button:focus, input:focus {
-    outline: 2px solid #ffcc00;
-    outline-offset: 2px;
+  @media (max-width: 991.98px) {
+    header {
+      display: flex !important;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px !important;
+    }
+  
+    /* Logo centralizado */
+    header > div:first-child {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+  
+    /* Botão do menu à esquerda */
+    .navbar {
+      order: -1;
+      margin-right: auto;
+    }
+  
+    .navbar-toggler {
+      border: 2px solid white;
+      padding: 0.5rem 0.75rem;
+    }
+  
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  
+    /* Botão "Sair" à direita */
+    header > div:last-child {
+      order: 1;
+      margin-left: auto;
+    }
+  
+    .navbar-nav {
+      gap: 15px;
+    }
+  
+    .nav-item {
+      padding: 8px 0;
+      border-bottom: none;
+    }
+  
+    .nav-link {
+      font-size: 1.1rem;
+      padding: 8px 12px !important;
+    }
+  
+    header img {
+      height: 50px !important;
+    }
+  
+    .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vw; /* Ocupa a largura total da viewport */
+      z-index: 1000;
+      background-color: #512da8; /* Cor sólida de fundo */
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
   }

@@ -28,4 +28,25 @@ function validarCPF(event) {
       return false;
     }
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    if (navbarToggler && navbarCollapse) {
+      navbarToggler.addEventListener('click', function() {
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+      });
+      
+      // Fechar o menu quando um item for clicado (opcional)
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navbarToggler.setAttribute('aria-expanded', 'false');
+          navbarCollapse.classList.remove('show');
+        });
+      });
+    }
+  });
   
