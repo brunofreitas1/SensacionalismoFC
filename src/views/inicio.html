@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Site de notícias futebolísticas" />
+  <meta name="author" content="BrunoBrandao&GabrielTimoteo" />
+  <meta name="keywords" content="Notícias de futebol sensacionalistas" />
+  <title>Sensacionalismo FC</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Cropper.js CSS/JS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+  <script src="/scripts/scripts.js" defer></script>
+</head>
+
+<body>
+  <header role="banner" class="main-header">
+    <div class="header-content">
+      <div class="header-logo">
+        <img src="/img/logo.png" alt="Logo Sensacionalismo FC">
+      </div>
+      <!-- Navegação -->
+      <nav class="navbar navbar-expand-lg navbar-dark" role="navigation" aria-label="Navegação principal">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" aria-label="Abrir menu de navegação" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav gap-3">
+              <li class="nav-item"><a class="nav-link" href="#hero">Início</a></li>
+              <li class="nav-item"><a class="nav-link" href="#campeonatos">Campeonatos</a></li>
+              <li class="nav-item"><a class="nav-link" href="#como-funciona">Como Funciona</a></li>
+              <li class="nav-item"><a class="nav-link" href="#cadastro">Cadastro</a></li>
+              <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="header-profile">
+        <button id="btnProfile" class="profile-avatar" title="Perfil">
+          <img src="/img/avatar-default.svg" alt="Foto do usuário" id="userAvatar">
+        </button>
+      </div>
+      <div class="header-logout">
+        <!-- Botão Sair -->
+        <button aria-label="Sair da conta" id="btnLogout" class="btn btn-danger">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" aria-labelledby="titulo-hero" class="hero">
+    <h2 id="titulo-hero">O site mais sensacionalista do futebol brasileiro!</h2>
+    <p>As notícias que fazem seu grupo do WhatsApp pegar fogo 🔥</p>
+    <a href="/register" class="btn-cta">Comece agora</a>
+  </section>
+
+  <main role="main">
+    <section id="campeonatos" class="section">
+      <h3 style="text-align: center; font-size: 2rem; margin-bottom: 30px;">🏆 Cobertura dos principais campeonatos
+      </h3>
+      <div class="card-grid">
+        <div class="card-campeonato"><i class="fas fa-flag-checkered"></i>
+          <h4>Brasileirão</h4>
+        </div>
+
+        <div class="card-campeonato"><i class="fas fa-trophy"></i>
+          <h4>Copa do Brasil</h4>
+        </div>
+
+        <div class="card-campeonato"><i class="fas fa-map-marker-alt"></i>
+          <h4>Estaduais</h4>
+        </div>
+
+        <div class="card-campeonato"><i class="fas fa-globe-americas"></i>
+          <h4>Libertadores</h4>
+        </div>
+
+        <div class="card-campeonato"><i class="fas fa-shield-alt"></i>
+          <h4>Sul-Americana</h4>
+        </div>
+
+        <div class="card-campeonato"><i class="fas fa-crown"></i>
+          <h4>Super Copa</h4>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section" aria-labelledby="titulo-como-funciona">
+      <h3 id="titulo-como-funciona">📲 Como acompanhar seu time do coração</h3>
+      <ol>
+        <li>Crie seu cadastro</li>
+        <li>Escolha seu time</li>
+        <li>Faça login</li>
+        <li>Receba atualizações automáticas</li>
+      </ol>
+    </section>
+
+    <!-- Placar Fake de Jogo ao Vivo -->
+    <section id="placar-fake" class="section" style="max-width: 500px; margin: 30px auto 0 auto;">
+      <div class="placar-fake-card">
+        <div class="placar-fake-header">
+          <span class="badge bg-danger">AO VIVO</span>
+          <span class="placar-fake-tempo">2ºT - 38'</span>
+        </div>
+        <div class="placar-fake-times">
+          <div class="placar-fake-time">
+            <img src="/img/logo.png" alt="Time A" class="placar-fake-logo">
+            <span class="placar-fake-nome">Corinthians</span>
+          </div>
+          <div class="placar-fake-resultado">
+            <span class="placar-fake-gols">2</span>
+            <span class="placar-fake-x">x</span>
+            <span class="placar-fake-gols">1</span>
+          </div>
+          <div class="placar-fake-time">
+            <img src="/img/juiz.png" alt="Time B" class="placar-fake-logo">
+            <span class="placar-fake-nome">Palmeiras</span>
+          </div>
+        </div>
+        <div class="placar-fake-eventos">
+          <span>⚽ 37' Yuri Alberto</span> <span>⚽ 22' Veiga</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Notícias do Seu Time -->
+    <section id="noticias-seu-time" class="section" style="margin-top: 30px;">
+      <h3>📰 Notícias do seu time</h3>
+      <div id="noticiasTimeContainer" class="card-grid"></div>
+    </section>
+
+    <section id="galeria" class="section">
+      <h3>📷 Principais Notícias</h3>
+      <div id="carouselNoticias" class="carousel slide">
+        <div class="carousel-indicators">
+          <!-- Indicadores serão adicionados dinamicamente pelo JavaScript -->
+        </div>
+        <div class="carousel-inner">
+          <!-- Mensagem de carregamento temporária -->
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-center align-items-center"
+              style="height: 400px; background-color: #f8f9fa;">
+              <div class="text-center">
+                <div class="spinner-border text-primary mb-3" role="status">
+                  <span class="visually-hidden">Carregando...</span>
+                </div>
+                <h5>Carregando notícias...</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticias" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticias" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Seção SOBRE agora após o carrossel -->
+    <section id="sobre" class="section sobre-modern">
+      <div class="sobre-card">
+        <div class="sobre-header">
+          <i class="fas fa-futbol"></i>
+          <h2>Sensacionalismo FC</h2>
+          <span class="sobre-tagline">Futebol, zoeira e informação na medida certa!</span>
+        </div>
+        <p class="sobre-missao">
+          O Sensacionalismo FC nasceu para quem ama futebol e não dispensa uma boa piada. Aqui, seu time é prioridade e a resenha é garantida!
+        </p>
+        <ul class="sobre-diferenciais">
+          <li><i class="fas fa-laugh"></i> Notícias com humor e criatividade</li>
+          <li><i class="fas fa-users"></i> Comunidade interativa</li>
+          <li><i class="fas fa-bolt"></i> Atualizações em tempo real</li>
+          <li><i class="fas fa-trophy"></i> Cobertura dos principais campeonatos</li>
+        </ul>
+        <a href="/register" class="btn-cta">Junte-se à zoeira!</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contato" role="contentinfo">
+    <address>
+      <p>Idealizado por <a href="mailto:Bruno&Gabriel@exemplo.com">Bruno
+          & Gabriel</a>.</p>
+      <p>Rua dos Exemplos, 123 — São Paulo/SP</p>
+    </address>
+    <p>&copy; 2025 Sensacionalismo FC. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Container de Notificações -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true" style="position: fixed; top: 24px; right: 24px; z-index: 9999;"></div>
+
+  <!-- Modal de Comentário -->
+  <div class="modal fade" id="modalComentario" tabindex="-1" aria-labelledby="modalComentarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalComentarioLabel">Comentar notícia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <textarea id="comentarioTexto" class="form-control" rows="4" placeholder="Digite seu comentário..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnEnviarComentario">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Perfil do Usuário -->
+  <div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="modalPerfilLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPerfilLabel">Meu Perfil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="perfil-avatar-edit">
+            <img src="/img/avatar-default.png" alt="Foto do usuário" id="perfilAvatarPreview">
+            <input type="file" id="inputAvatar" accept="image/*" style="display:none;">
+            <button class="btn btn-outline-primary btn-sm" id="btnTrocarAvatar">Trocar foto</button>
+          </div>
+          <form id="formPerfil">
+            <div class="mb-3">
+              <label for="perfilNome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="perfilNome" required>
+            </div>
+            <div class="mb-3">
+              <label for="perfilEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="perfilEmail" required disabled>
+            </div>
+            <div class="mb-3">
+              <label for="perfilTime" class="form-label">Time do coração</label>
+              <select class="form-select" id="perfilTime"></select>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar alterações</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay e modal de recorte de avatar -->
+  <div id="cropperModalOverlay">
+    <div id="cropperModal">
+      <h5>Recorte sua foto de perfil</h5>
+      <img id="cropperImage" src="" alt="Recorte do avatar">
+      <div style="margin-top: 12px;">
+        <button class="btn btn-primary" id="btnCropConfirm">Usar esta foto</button>
+        <button class="btn btn-secondary" id="btnCropCancel">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="avatarLoadingOverlay">
+    <div class="spinner-border" role="status"><span class="visually-hidden">Enviando...</span></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

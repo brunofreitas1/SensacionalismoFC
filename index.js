@@ -12,9 +12,9 @@ const path = require('path');
 // Servir arquivos estáticos da pasta "views"
 app.use(express.static(path.join(__dirname, 'views')));
 
-// Rota raiz renderizando um HTML
+// Rota raiz renderizando o HTML correto
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'home.html'));
+  res.sendFile(path.join(__dirname, 'views', 'inicio.html'));
 });
 
 // Rota de login renderizando um HTML
