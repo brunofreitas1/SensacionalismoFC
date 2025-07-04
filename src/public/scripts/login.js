@@ -3,6 +3,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
   const email = document.getElementById("email").value.trim();
   const senha = document.getElementById("senha").value.trim();
+  const lembrar = document.getElementById("lembrar").checked;
   const form = e.target;
 
   if (!email || !senha) {
@@ -29,8 +30,17 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     // Login bem-sucedido!
     alert("Login realizado com sucesso!");
 
-    // Armazena o token JWT no localStorage. É mais seguro que o antigo "usuarioLogado=true"
-    localStorage.setItem("sensacionalismo_fc_token", data.token);
+    // Salva o token conforme o checkbox
+    if (lembrar) {
+      // Salva em cookie por 30 dias
+      document.cookie = `sensacionalismo_fc_token=${data.token}; path=/; max-age=${60*60*24*30}`;
+      localStorage.setItem("sensacionalismo_fc_token", data.token); // Mantém também no localStorage para facilitar uso
+    } else {
+      // Salva no localStorage (sessão)
+      localStorage.setItem("sensacionalismo_fc_token", data.token);
+      // Remove o cookie se existir
+      document.cookie = 'sensacionalismo_fc_token=; path=/; max-age=0';
+    }
 
     // Atualiza o avatar do header imediatamente
     const userAvatar = document.getElementById('userAvatar');

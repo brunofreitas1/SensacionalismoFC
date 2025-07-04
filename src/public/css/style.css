@@ -670,6 +670,24 @@ footer {
   color: #7f53ac;
 }
 
+/* Botão registrar-se no header mais visível */
+#headerAuth .btn-outline-primary {
+  background: #fff;
+  color: #7f53ac;
+  border: 2px solid #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(80,36,180,0.10);
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+#headerAuth .btn-outline-primary:hover, #headerAuth .btn-outline-primary:focus {
+  background: #ffd700;
+  color: #7f53ac;
+  border: 2px solid #ffd700;
+}
+#headerAuth .btn-primary {
+  font-weight: 700;
+}
+
 @media (max-width: 991.98px) {
   header {
     padding: 10px 10px !important;

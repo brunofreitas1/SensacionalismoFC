@@ -4,9 +4,8 @@ import { protect } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// A rota GET para /api/news protegida.
-// Se o token for válido, ele chama o 'getNews' (controller).
-router.get('/', protect, getNews);
+// rota GET / pública (sem autenticação)
+router.get('/', getNews);
 router.get('/:id/comentarios', protect, getComments);
 router.post('/:id/comentarios', protect, addComment);
 router.get('/:id/curtidas', protect, getLikes);

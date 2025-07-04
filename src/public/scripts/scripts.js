@@ -1,12 +1,35 @@
 // Variável para controlar se as notícias já foram carregadas
 let noticiasCarregadas = false;
 
+// Recupera token do cookie se não houver no localStorage
+function getCookieToken() {
+    const match = document.cookie.match(/(?:^|; )sensacionalismo_fc_token=([^;]+)/);
+    return match ? match[1] : null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
+    let token = localStorage.getItem('sensacionalismo_fc_token');
+    if (!token) {
+        token = getCookieToken();
+        if (token) localStorage.setItem('sensacionalismo_fc_token', token);
+    }
+    // Controle de exibição do header
+    const headerProfile = document.getElementById('headerProfile');
+    const headerLogout = document.getElementById('headerLogout');
+    const headerAuth = document.getElementById('headerAuth');
+    if (token) {
+        if (headerProfile) headerProfile.style.display = '';
+        if (headerLogout) headerLogout.style.display = '';
+        if (headerAuth) headerAuth.style.display = 'none';
+    } else {
+        if (headerProfile) headerProfile.style.display = 'none';
+        if (headerLogout) headerLogout.style.display = 'none';
+        if (headerAuth) headerAuth.style.display = 'flex';
+    }
 
     if (path === '/' || path === '/inicio.html') {
         // Removido o bloqueio de login para acesso à página inicial
-        const token = localStorage.getItem('sensacionalismo_fc_token');
         if (!noticiasCarregadas) {
             carregarNoticias(token); // Se não houver token, o backend pode retornar notícias públicas
             configurarLogout();
@@ -34,9 +57,11 @@ async function carregarNoticias(token) {
     carregandoNoticias = true;
     
     try {
+        // Monta headers apenas se houver token
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
         const response = await fetch('/api/news', {
             method: 'GET',
-            headers: { 'Authorization': `Bearer ${token}` }
+            headers
         });
 
         if (response.status === 401) {
@@ -164,8 +189,10 @@ function configurarLogout() {
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             localStorage.removeItem('sensacionalismo_fc_token');
+            // Remove o cookie do token também
+            document.cookie = 'sensacionalismo_fc_token=; path=/; max-age=0';
             alert("Você saiu da sua conta.");
-            window.location.replace('/login');
+            window.location.replace('/'); // Redireciona para a página inicial pública
         });
     }
 }

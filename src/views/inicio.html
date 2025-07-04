@@ -42,14 +42,19 @@
           </div>
         </div>
       </nav>
-      <div class="header-profile">
+      <div class="header-profile" id="headerProfile">
         <button id="btnProfile" class="profile-avatar" title="Perfil">
           <img src="/img/avatar-default.svg" alt="Foto do usuário" id="userAvatar">
         </button>
       </div>
-      <div class="header-logout">
+      <div class="header-logout" id="headerLogout">
         <!-- Botão Sair -->
         <button aria-label="Sair da conta" id="btnLogout" class="btn btn-danger">Sair</button>
+      </div>
+      <!-- Botões de login/registro para usuários não autenticados -->
+      <div class="header-auth" id="headerAuth" style="display:none; gap: 10px;">
+        <a href="/login" id="btnLogin" class="btn btn-primary">Fazer login</a>
+        <a href="/register" id="btnRegister" class="btn btn-outline-primary">Registrar-se</a>
       </div>
     </div>
   </header>

@@ -62,4 +62,7 @@ INSERT INTO noticias (titulo, conteudo, imagem_url, time_id) VALUES
 ('Mais um pênalti pro Varmeiras!', 'Rafael Veiga espirra dentro da grande área, cai no chão e um pênalti é marcado a favor do Palmeiras.', 'img/juiz.png', 2),
 ('Surpreendente', 'Nigéria bate a seleção da França por 3 a 0 com três gols contras de Mbappe', 'img/selecoes.png', NULL),
 ('Desfalque para o Bayern', 'Harry Kane já coleciona mais lesões do que títulos', 'img/falta.png', NULL),
-('Tricolor soberano!', 'São Paulo vence o rival alviverde com show de Calleri no Morumbi.', 'img/falta.png', 3);
+('É o trikas!', 'São paulo vence em meio as piscinas da arquibancada do morumbis', 'img/morumbis.webp', 3),
+('Neymar fica!', 'O peixe virou pet. Com mais festas do que jogos, neymar anuncia que fica no Santos', 'img/peixe_na_coleira.webp', 4),
+('Real Madrid, pode esperar!', 'Flamengo toma taca do bayern no mundial e fica só no cheirinho', 'img/cheirinho.webp', 5),
+('Vasco respira!', 'Vasco da Gama consegue pagar conta de luz de São Januário', 'img/vaxco.webp', 6);

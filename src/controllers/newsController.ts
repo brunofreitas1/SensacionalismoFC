@@ -27,21 +27,27 @@ const dbRun = (query: string, params: any[] = []) => {
 
 export const getNews = async (req: AuthenticatedRequest, res: Response) => {
     try {
-        const user = req.user; // Pegamos os dados do usuário que o middleware decodificou
-
-        // Nossa consulta SQL inteligente:
-        // Usa CASE para colocar as notícias do time do coração do usuário primeiro.
-        const sql = `
-            SELECT * FROM noticias
-            ORDER BY
-                CASE
-                    WHEN time_id = ? THEN 0
-                    ELSE 1
-                END,
-            id DESC
-        `;
-
-        const news = await dbGetAll<any>(sql, [user.time_id]);
+        const user = req.user;
+        let sql: string;
+        let params: any[];
+        if (user && user.time_id) {
+            // Usuário autenticado: prioriza notícias do time
+            sql = `
+                SELECT * FROM noticias
+                ORDER BY
+                    CASE
+                        WHEN time_id = ? THEN 0
+                        ELSE 1
+                    END,
+                    id DESC
+            `;
+            params = [user.time_id];
+        } else {
+            // Visitante: mostra todas as notícias normalmente
+            sql = `SELECT * FROM noticias ORDER BY id DESC`;
+            params = [];
+        }
+        const news = await dbGetAll<any>(sql, params);
         res.status(200).json(news);
 
     } catch (error) {
