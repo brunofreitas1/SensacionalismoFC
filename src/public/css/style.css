@@ -30,6 +30,7 @@ header {
   margin: 0 auto;
   padding: 0 32px;
   min-height: 90px;
+  position: relative;
 }
 
 header img {
@@ -52,6 +53,16 @@ header img {
   display: flex;
   align-items: center;
   margin-right: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.header-auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .profile-avatar {

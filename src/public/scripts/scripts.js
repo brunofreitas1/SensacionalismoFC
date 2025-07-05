@@ -41,6 +41,21 @@ document.addEventListener('DOMContentLoaded', () => {
         carregarTimes();
         configurarFormularioCadastro();
     }
+
+    // Atualiza o avatar do header imediatamente ao carregar a página, se o usuário estiver logado
+    if (token) {
+        fetch('/api/auth/profile', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(res => res.ok ? res.json() : null)
+        .then(user => {
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                const fotoUrl = (user && user.foto_url && user.foto_url !== 'null') ? user.foto_url : '/img/avatar-default.svg';
+                userAvatar.src = fotoUrl;
+            }
+        });
+    }
 });
 
 // --- FUNÇÕES GLOBAIS ---
@@ -138,8 +153,8 @@ async function carregarNoticias(token) {
         const noticiasTimeContainer = document.getElementById('noticiasTimeContainer');
         if (noticiasTimeContainer) {
             noticiasTimeContainer.innerHTML = '';
-            // Filtra notícias do time do usuário (as primeiras do array)
-            const timeIdUsuario = noticias.length > 0 ? noticias[0].time_id : null;
+            // Filtra notícias do time do usuário usando o time_id salvo no localStorage
+            const timeIdUsuario = parseInt(localStorage.getItem('sensacionalismo_fc_time_id'));
             const noticiasTime = noticias.filter(n => n.time_id === timeIdUsuario);
             if (noticiasTime.length > 0) {
                 noticiasTime.forEach(noticia => {

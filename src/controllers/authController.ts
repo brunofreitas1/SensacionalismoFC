@@ -1,36 +1,11 @@
 // src/controllers/authController.ts
 
 import { Request, Response, RequestHandler } from 'express';
-import { db } from '../database/database';
+import { Usuario } from '../models/Usuario';
+import { Time } from '../models/Time';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-// --- Helper para Promisificar as funções do DB ---
-// Isso nos permite usar async/await com o sqlite3
-const dbRun = (query: string, params: any[] = []) => {
-    return new Promise<number>((resolve, reject) => {
-        db.run(query, params, function(err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(this.lastID);
-            }
-        });
-    });
-};
-
-const dbGet = <T>(query: string, params: any[] = []) => {
-    return new Promise<T>((resolve, reject) => {
-        db.get(query, params, (err, row: T) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(row);
-            }
-        });
-    });
-};
-// ---------------------------------------------------
+import { db } from '../database/database';
 
 export const register: RequestHandler = async (req: Request, res: Response) => {
     try {
@@ -43,8 +18,7 @@ export const register: RequestHandler = async (req: Request, res: Response) => {
         }
 
         // 2. Verifica se o e-mail ou CPF já existem (usando nossa função 'promisificada')
-        const checkUserSql = `SELECT * FROM usuarios WHERE email = ? OR cpf = ?`;
-        const existingUser = await dbGet<any>(checkUserSql, [email, cpf]);
+        const existingUser = await Usuario.buscarPorEmail(email);
 
         if (existingUser) {
             res.status(409).json({ message: "E-mail ou CPF já cadastrado." });
@@ -56,8 +30,14 @@ export const register: RequestHandler = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(senha, salt);
 
         // 4. Insere o novo usuário no banco de dados (usando nossa função 'promisificada')
-        const insertSql = `INSERT INTO usuarios (nome, email, senha, data_nascimento, cpf, time_id) VALUES (?, ?, ?, ?, ?, ?)`;
-        const userId = await dbRun(insertSql, [nome, email, hashedPassword, data_nascimento, cpf, time_id]);
+        const userId = await Usuario.criar({
+            nome,
+            email,
+            senha: hashedPassword,
+            data_nascimento,
+            cpf,
+            time_id
+        });
 
         // Sucesso!
         res.status(201).json({ message: "Usuário cadastrado com sucesso!", userId });
@@ -78,8 +58,8 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
             return;
         }
 
-        // 1. Encontra o usuário pelo e-mail
-        const user = await dbGet<any>('SELECT * FROM usuarios WHERE email = ?', [email]);
+        // 1. Encontra o usuário pelo e-mail usando o model
+        const user = await Usuario.buscarPorEmail(email);
         if (!user) {
             res.status(404).json({ message: "Usuário não encontrado." });
             return;
@@ -122,7 +102,7 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
 // export
 export const getTeams: RequestHandler = async (req, res) => {
     try {
-        const teams = await dbGetAll<any>('SELECT * FROM times ORDER BY nome');
+        const teams = await Time.listarTodos();
         res.status(200).json(teams);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar times.' });
@@ -132,19 +112,17 @@ export const getTeams: RequestHandler = async (req, res) => {
 // Buscar perfil do usuário autenticado
 export const getProfile = async (req: any, res: Response) => {
     try {
-        console.log('REQ.USER:', req.user); // LOG: payload do token
         const userId = req.user.id;
-        const sql = `SELECT id, nome, email, time_id, foto_url FROM usuarios WHERE id = ?`;
-        const user = await dbGet<any>(sql, [userId]);
-        console.log('USER FROM DB:', user); // LOG: resultado da query
-        if (!user) { res.status(404).json({ message: 'Usuário não encontrado.' }); return; }
-        // Garante que foto_url sempre existe na resposta
+        const user = await Usuario.buscarPorId(userId);
+        if (!user) {
+            res.status(404).json({ message: 'Usuário não encontrado.' });
+            return;
+        }
         res.status(200).json({ ...user, foto_url: user.foto_url || null });
     } catch (error) {
-        console.error('ERRO AO BUSCAR PERFIL:', error); // LOG: erro detalhado
+        console.error('ERRO AO BUSCAR PERFIL:', error);
         res.status(500).json({ message: 'Erro ao buscar perfil.' });
     }
-    return;
 };
 
 // Atualizar perfil do usuário autenticado
@@ -152,13 +130,11 @@ export const updateProfile = async (req: any, res: Response) => {
     try {
         const userId = req.user.id;
         const { nome, time_id, foto_url } = req.body;
-        const sql = `UPDATE usuarios SET nome = ?, time_id = ?, foto_url = ? WHERE id = ?`;
-        await dbRun(sql, [nome, time_id, foto_url, userId]);
+        await Usuario.atualizarPerfil(userId, nome, time_id, foto_url);
         res.status(200).json({ message: 'Perfil atualizado!' });
     } catch (error) {
         res.status(500).json({ message: 'Erro ao atualizar perfil.' });
     }
-    return;
 };
 
 const dbGetAll = <T>(query: string, params: any[] = []) => {

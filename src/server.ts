@@ -4,6 +4,7 @@ import { db, initializeDatabase } from './database/database';
 import authRoutes from './routes/authRoutes';
 import newsRoutes from './routes/newsRoutes';
 import uploadRoutes from './routes/uploadRoutes';
+import timeRoutes from './routes/timeRoutes';
 
 const app = express();
 const port = 3000;
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/auth', authRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/times', timeRoutes);
 
 // Rota para a página de login
 app.get('/login', (req, res) => {

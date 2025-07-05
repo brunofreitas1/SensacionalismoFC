@@ -42,6 +42,11 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       document.cookie = 'sensacionalismo_fc_token=; path=/; max-age=0';
     }
 
+    // Salva o time_id do usuário logado
+    if (data.user && data.user.time_id) {
+      localStorage.setItem('sensacionalismo_fc_time_id', data.user.time_id);
+    }
+
     // Atualiza o avatar do header imediatamente
     const userAvatar = document.getElementById('userAvatar');
     if (userAvatar) {
