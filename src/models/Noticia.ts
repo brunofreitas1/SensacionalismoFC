@@ -85,7 +85,7 @@ export class Noticia {
       db.get(
         `SELECT COUNT(*) as total FROM curtidas WHERE noticia_id = ?`,
         [noticiaId],
-        (err, row) => {
+        (err, row: { total: number }) => {
           if (err) return reject(err);
           resolve(row?.total || 0);
         }

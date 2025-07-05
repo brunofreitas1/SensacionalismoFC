@@ -258,7 +258,7 @@ function configurarFormularioCadastro() {
             const submitButton = form.querySelector('button[type="submit"]');
 
             if (!isCpfValido(cpfInput.value)) {
-                alert("CPF inválido.");
+                mostrarToast("CPF inválido.", 'comentario');
                 return;
             }
 
@@ -283,13 +283,15 @@ function configurarFormularioCadastro() {
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.message);
 
-                alert("Cadastro realizado com sucesso! Agora você pode fazer o login.");
-                form.reset();
-                window.location.href = '/login';
+                mostrarToast("Cadastro realizado com sucesso! Agora você pode fazer o login.", 'gol');
+                setTimeout(() => {
+                  form.reset();
+                  window.location.href = '/login';
+                }, 1200);
 
             } catch (error) {
                 console.error("Falha no cadastro:", error);
-                alert(`❌ Falha no cadastro: ${error.message}`);
+                mostrarToast(`❌ Falha no cadastro: ${error.message}`, 'comentario');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Cadastrar';
             }
@@ -305,12 +307,22 @@ function mostrarToast(mensagem, tipo = 'gol') {
     toast.className = `toast-notification toast-${tipo}`;
     let icone = '⚽';
     if (tipo === 'curtida') icone = '👍';
-    if (tipo === 'comentario') icone = '💬';
-    toast.innerHTML = `<span class="toast-icon">${icone}</span> ${mensagem}`;
+    if (tipo === 'comentario') icone = '<span style="color:#ff5252;font-size:2.1rem;line-height:1;">&#10060;</span>';
+    if (tipo === 'gol') icone = '<span style="color:#ffd700;font-size:2.1rem;line-height:1;">&#9917;</span>';
+    toast.innerHTML = `<span class="toast-icon">${icone}</span> <span style="flex:1;align-items:center;display:flex;">${mensagem}</span><button class="toast-close" aria-label="Fechar">&times;</button>`;
+    // Botão de fechar
+    toast.querySelector('.toast-close').onclick = () => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px) scale(0.98)';
+        setTimeout(() => container.removeChild(toast), 400);
+    };
     container.appendChild(toast);
     setTimeout(() => {
         toast.style.opacity = '0';
-        setTimeout(() => container.removeChild(toast), 400);
+        toast.style.transform = 'translateY(-20px) scale(0.98)';
+        setTimeout(() => {
+            if (toast.parentNode) container.removeChild(toast);
+        }, 400);
     }, 3500);
 }
 
@@ -581,9 +593,12 @@ if (btnCropConfirm) {
 
 // Exemplo: simular notificação de gol ao entrar na página
 window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        mostrarToast('Gol do Corinthians! Yuri Alberto marca aos 37 do 2ºT', 'gol');
-    }, 2000);
+    // Só exibe notificação fake de gol na página inicial
+    if (window.location.pathname === '/' || window.location.pathname === '/inicio' || window.location.pathname === '/inicio.html') {
+        setTimeout(() => {
+            mostrarToast('Gol do Corinthians! Yuri Alberto marca aos 37 do 2ºT', 'gol');
+        }, 2000);
+    }
 });
 
 // Ao carregar a página, garantir que o avatar do header sempre comece com o SVG padrão

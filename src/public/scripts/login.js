@@ -7,7 +7,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
   const form = e.target;
 
   if (!email || !senha) {
-    alert("Por favor, preencha o e-mail e a senha.");
+    mostrarToast("Por favor, preencha o e-mail e a senha.", 'comentario');
     return;
   }
 
@@ -27,8 +27,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       throw new Error(data.message || 'Erro ao fazer login.');
     }
 
-    // Login bem-sucedido!
-    alert("Login realizado com sucesso!");
+    mostrarToast("Login realizado com sucesso!", 'gol');
 
     // Salva o token conforme o checkbox
     if (lembrar) {
@@ -54,11 +53,12 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       userAvatar.src = fotoUrl;
     }
 
-    // Redireciona para a página inicial
-    window.location.href = "/"; // O servidor vai nos levar para a 'inicio.html'
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1200);
 
   } catch (error) {
     console.error("Falha no login:", error);
-    alert(`❌ Falha no login: ${error.message}`);
+    mostrarToast(`❌ Falha no login: ${error.message}`, 'comentario');
   }
 });

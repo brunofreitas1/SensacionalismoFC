@@ -12,8 +12,15 @@ const port = 3000;
 // Configura o Express para usar o JSON
 app.use(express.json());
 
+// Middleware para processar dados de formulários
+app.use(express.urlencoded({ extended: true }));
+
 // Configura o Express para servir arquivos estáticos (CSS, JS, imagens) da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Configura o Express para usar o EJS como view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Configura o Express para servir arquivos HTML da pasta 'views'
 app.use('/api/auth', authRoutes);
@@ -23,17 +30,67 @@ app.use('/api/times', timeRoutes);
 
 // Rota para a página de login
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+    res.render('login');
 });
 
-// Rota para a página de registro
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'register.html'));
+// Função utilitária para promessas sqlite3
+function dbAllAsync(sql, params = []) {
+    return new Promise((resolve, reject) => {
+        db.all(sql, params, (err, rows) => err ? reject(err) : resolve(rows));
+    });
+}
+function dbGetAsync(sql, params = []) {
+    return new Promise((resolve, reject) => {
+        db.get(sql, params, (err, row) => err ? reject(err) : resolve(row));
+    });
+}
+function dbRunAsync(sql, params = []) {
+    return new Promise((resolve, reject) => {
+        db.run(sql, params, function (err) {
+            if (err) reject(err); else resolve(this.lastID);
+        });
+    });
+}
+
+// Rota para a página de registro (GET)
+app.get('/register', async (req, res) => {
+    const times = await dbAllAsync('SELECT * FROM times ORDER BY nome');
+    res.render('register', { values: {}, errors: {}, times });
+});
+
+// Rota para cadastro (POST)
+app.post('/register', async (req, res) => {
+    const { nome, email, senha, cpf, data_nascimento, time_id } = req.body;
+    const values = { nome, email, senha, cpf, data_nascimento, time_id };
+    const errors: any = {};
+    // Validação simples
+    if (!nome) errors.nome = 'Nome obrigatório';
+    if (!email) errors.email = 'E-mail obrigatório';
+    if (!senha) errors.senha = 'Senha obrigatória';
+    if (!cpf) errors.cpf = 'CPF obrigatório';
+    if (!data_nascimento) errors.data_nascimento = 'Data de nascimento obrigatória';
+    if (!time_id) errors.time_id = 'Selecione um time';
+    // Verifica se já existe usuário
+    let existingUser = null;
+    if (email) existingUser = await dbGetAsync('SELECT * FROM usuarios WHERE email = ?', [email]);
+    if (existingUser) errors.email = 'E-mail já cadastrado';
+    if (Object.keys(errors).length > 0) {
+        const times = await dbAllAsync('SELECT * FROM times ORDER BY nome');
+        return res.status(400).render('register', { values, errors, times });
+    }
+    // Cria usuário
+    const bcrypt = require('bcryptjs');
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(senha, salt);
+    await dbRunAsync('INSERT INTO usuarios (nome, email, senha, data_nascimento, cpf, time_id) VALUES (?, ?, ?, ?, ?, ?)',
+        [nome, email, hashedPassword, data_nascimento, cpf, time_id]);
+    const times = await dbAllAsync('SELECT * FROM times ORDER BY nome');
+    res.render('register', { values: {}, errors: { success: 'Cadastro realizado com sucesso! Faça login.' }, times });
 });
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'inicio.html'));
+    res.render('inicio');
 });
 
 // Função auto-executável para inicializar e iniciar o servidor
