@@ -291,7 +291,7 @@ function configurarFormularioCadastro() {
 
             } catch (error) {
                 console.error("Falha no cadastro:", error);
-                mostrarToast(`❌ Falha no cadastro: ${error.message}`, 'comentario');
+                mostrarToast(`Falha no cadastro: ${error.message}`, 'comentario');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Cadastrar';
             }
@@ -337,11 +337,15 @@ function abrirModalComentario(noticiaId) {
 
 // Evento de envio do comentário
 const btnEnviarComentario = document.getElementById('btnEnviarComentario');
-if (btnEnviarComentario) {
+const comentarioTexto = document.getElementById('comentarioTexto');
+if (btnEnviarComentario && comentarioTexto) {
     btnEnviarComentario.addEventListener('click', async () => {
-        const texto = document.getElementById('comentarioTexto').value.trim();
+        const texto = comentarioTexto.value.trim();
+        // Limpa erro visual
+        comentarioTexto.classList.remove('is-invalid');
         if (!texto) {
             mostrarToast('Digite um comentário antes de enviar.', 'comentario');
+            comentarioTexto.classList.add('is-invalid');
             return;
         }
         const token = localStorage.getItem('sensacionalismo_fc_token');
@@ -349,6 +353,10 @@ if (btnEnviarComentario) {
             mostrarToast('Erro ao enviar comentário.', 'comentario');
             return;
         }
+        // Loading visual
+        btnEnviarComentario.disabled = true;
+        btnEnviarComentario.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Enviando...';
+        comentarioTexto.disabled = true;
         try {
             const response = await fetch(`/api/news/${comentarioNoticiaId}/comentarios`, {
                 method: 'POST',
@@ -360,11 +368,14 @@ if (btnEnviarComentario) {
             });
             if (!response.ok) throw new Error('Erro ao enviar comentário');
             mostrarToast('Comentário enviado!', 'comentario');
-            // Atualiza comentários da notícia correta
             renderizarComentarios(comentarioNoticiaId);
         } catch (e) {
             mostrarToast('Erro ao enviar comentário.', 'comentario');
         }
+        // Restaura estado
+        btnEnviarComentario.disabled = false;
+        btnEnviarComentario.innerHTML = 'Enviar';
+        comentarioTexto.disabled = false;
         const modal = bootstrap.Modal.getInstance(document.getElementById('modalComentario'));
         if (modal) modal.hide();
     });

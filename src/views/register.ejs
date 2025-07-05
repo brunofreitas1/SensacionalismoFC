@@ -11,6 +11,11 @@
 </head>
 <body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
 
+  <% // Garantia de variáveis para evitar ReferenceError %>
+  <% var errors = typeof errors !== 'undefined' ? errors : {}; %>
+  <% var values = typeof values !== 'undefined' ? values : {}; %>
+  <% var times = typeof times !== 'undefined' ? times : []; %>
+
   <div class="container">
     <div class="card shadow p-4" style="max-width: 850px; margin: auto;">
       <div class="card-body">
@@ -82,7 +87,7 @@
   <% if (errors && errors.success) { %>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        var msg = <%= JSON.stringify(errors.success) %>;
+        var msg = "<%= errors && errors.success ? errors.success : '' %>";
         mostrarToast(msg, 'gol');
       });
     </script>

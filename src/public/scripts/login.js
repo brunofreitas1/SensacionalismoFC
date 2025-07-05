@@ -1,15 +1,28 @@
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
   e.preventDefault(); // Impede o recarregamento da página
 
-  const email = document.getElementById("email").value.trim();
-  const senha = document.getElementById("senha").value.trim();
+  const emailInput = document.getElementById("email");
+  const senhaInput = document.getElementById("senha");
+  const btn = e.target.querySelector('button[type="submit"]');
   const lembrar = document.getElementById("lembrar").checked;
-  const form = e.target;
+  const email = emailInput.value.trim();
+  const senha = senhaInput.value.trim();
+  // Estado inicial: limpa erros visuais
+  emailInput.classList.remove('is-invalid');
+  senhaInput.classList.remove('is-invalid');
 
   if (!email || !senha) {
     mostrarToast("Por favor, preencha o e-mail e a senha.", 'comentario');
+    if (!email) emailInput.classList.add('is-invalid');
+    if (!senha) senhaInput.classList.add('is-invalid');
     return;
   }
+
+  // Loading visual
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Entrando...';
+  emailInput.disabled = true;
+  senhaInput.disabled = true;
 
   try {
     const response = await fetch('/api/auth/login', {
@@ -58,7 +71,13 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     }, 1200);
 
   } catch (error) {
-    console.error("Falha no login:", error);
-    mostrarToast(`❌ Falha no login: ${error.message}`, 'comentario');
+    btn.disabled = false;
+    btn.innerHTML = 'Entrar no gramado ⚽';
+    emailInput.disabled = false;
+    senhaInput.disabled = false;
+    // Feedback visual de erro
+    emailInput.classList.add('is-invalid');
+    senhaInput.classList.add('is-invalid');
+    mostrarToast(`Erro ao fazer login: ${error.message}`, 'comentario');
   }
 });
